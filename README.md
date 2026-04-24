@@ -14,21 +14,22 @@
 
 ## 🎯 Highlights
 
-- **3 customer segments** identified via K-Means (k=3 chosen via elbow method, validated against k=4 using silhouette scores)
+- **k=3 validated** — silhouette peaks at **0.351** (vs 0.298 for k=4), confirming three as the right cluster count
 - **RFMT methodology** — extends classical RFM with **Tenure** (days as customer) for richer lifecycle signals
 - **Three deliverables** — notebook analysis, Power BI dashboard, live Streamlit predictor
-- **Actionable marketing playbook** — concrete campaigns per segment (VIP rewards, nurture, win-back)
+- **One segment drives 84% of revenue** — the **Promising** cluster (38% of customers) concentrates the bulk of spend (classic Pareto)
+- **76% of At Risk customers at Critical churn risk** — immediate re-engagement needed
 - **Cohort analysis** with retention heatmaps to frame the clustering work
 
 ## 🧩 Segment profiles
 
-| Segment | Behavior | Marketing play |
-|---|---|---|
-| 👑 **Champions** | High frequency · high spend · recent activity · long tenure | VIP rewards, early access, premium launches, loyalty tiers |
-| ⭐ **Promising** | Medium values across all RFMT metrics — emerging loyal customers | Nurture flows, cross-sell, personalized recommendations |
-| ⚠️ **At Risk** | High recency (inactive), lower frequency — early churn signals | Win-back campaigns, retention offers, re-engagement emails |
+Values below are **means** computed from `customer_segments_analysis.csv` (4,269 customers total).
 
-The **Champions** segment concentrates the majority of revenue (Pareto in action) — the core insight driving the marketing recommendations in the notebook.
+| Segment | Customers | Recency | Frequency | Monetary | Tenure | Key marketing play |
+|---|---:|---:|---:|---:|---:|---|
+| ⭐ **Promising** | 1,634 (38%) | 30 d | 188 | $4,412 | 274 d | **Drives 84% of revenue.** Protect with VIP program, early access, retention offers |
+| 👑 **Champions** | 948 (22%) | 34 d | 34 | $481 | 50 d | Active newer customers — onboarding, welcome offers, nurture toward Promising |
+| ⚠️ **At Risk** | 1,687 (40%) | 174 d | 27 | $564 | 241 d | **76% at Critical churn risk.** Win-back campaigns, reactivation offers |
 
 ## 🧪 Methodology
 
@@ -42,6 +43,35 @@ The **Champions** segment concentrates the majority of revenue (Pareto in action
 8. **Profile** — snake plots, relative-importance heatmaps, 3D scatter, sunburst
 9. **Business interpretation** — name segments, compute revenue share, identify churn risk
 10. **Export** — labeled customers (`customer_segments_analysis.csv`), trained `kmeans_model.pkl`, fitted `scaler.pkl` — consumed by the Streamlit app
+
+## 📊 Results & key plots
+
+> All plots below are regenerated from `customer_segments_analysis.csv` — run `python generate_figures.py` to reproduce them.
+
+### Choosing k: SSE elbow + silhouette peak
+![Elbow and silhouette](figures/elbow-silhouette.png)
+
+SSE drops sharply until k=3 and then flattens. More importantly, silhouette **peaks at k=3 (0.351)** and drops for k≥4 — k=3 produces both a natural elbow and the most separable clusters.
+
+### Segment sizes and revenue share
+![Segment overview](figures/segment-overview.png)
+
+**Promising** contains 38% of customers but drives **84% of total revenue** — the Pareto principle in action. Retaining this segment is the #1 business priority.
+
+### RFMT fingerprint per segment
+![RFMT fingerprint](figures/rfmt-fingerprint.png)
+
+Promising customers order far more frequently (188 vs 27–34) and spend far more per customer ($4,412 vs ~$500). At Risk customers haven't purchased in ~6 months on average.
+
+### Segments in RFM space
+![3D scatter](figures/segments-3d.png)
+
+The three clusters separate visibly along the Frequency and Monetary axes. At Risk customers stretch along the Recency axis (inactive), while Promising anchors the high end of frequency × monetary.
+
+### Churn risk distribution
+![Churn risk](figures/churn-risk.png)
+
+**76% of At Risk customers are at Critical churn risk** — they need immediate re-engagement. Champions and Promising customers are mostly Low or Medium risk.
 
 ## 🖼️ Power BI dashboard
 
@@ -68,6 +98,13 @@ customer-segmentation-rfmt/
 │   ├── home-page.png
 │   ├── rfm-analysis.png
 │   └── performances.png
+├── figures/                        # Analysis plots (generated, used by README)
+│   ├── elbow-silhouette.png
+│   ├── segment-overview.png
+│   ├── rfmt-fingerprint.png
+│   ├── segments-3d.png
+│   └── churn-risk.png
+├── generate_figures.py             # Regenerates figures/ from the CSV
 ├── requirements.txt
 ├── LICENSE
 └── README.md
