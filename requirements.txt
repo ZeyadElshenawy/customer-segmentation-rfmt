@@ -1,0 +1,15 @@
+# Core data stack
+pandas
+numpy
+scikit-learn
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Notebook
+jupyter
+
+# Live predictor app (app.py)
+streamlit

@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.env
+.env.local
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Raw dataset (44 MB — download from UCI, see README)
+Online Retail.csv
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Streamlit
+.streamlit/
+
+# Logs
+*.log
