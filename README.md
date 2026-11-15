@@ -17,8 +17,8 @@
 - **k=3 validated** — silhouette peaks at **0.351** (vs 0.298 for k=4), confirming three as the right cluster count
 - **RFMT methodology** — extends classical RFM with **Tenure** (days as customer) for richer lifecycle signals
 - **Three deliverables** — notebook analysis, Power BI dashboard, live Streamlit predictor
-- **One segment drives 84% of revenue** — the **Promising** cluster (38% of customers) concentrates the bulk of spend (classic Pareto)
-- **76% of At Risk customers at Critical churn risk** — immediate re-engagement needed
+- **One segment drives 84% of revenue** — the **High-Value** cluster (38% of customers) concentrates the bulk of spend (classic Pareto)
+- **76% of Lapsed customers at Critical churn risk** — immediate re-engagement needed
 - **Cohort analysis** with retention heatmaps to frame the clustering work
 
 ## 🧩 Segment profiles
@@ -27,9 +27,9 @@ Values below are **means** computed from `customer_segments_analysis.csv` (4,269
 
 | Segment | Customers | Recency | Frequency | Monetary | Tenure | Key marketing play |
 |---|---:|---:|---:|---:|---:|---|
-| ⭐ **Promising** | 1,634 (38%) | 30 d | 188 | $4,412 | 274 d | **Drives 84% of revenue.** Protect with VIP program, early access, retention offers |
-| 👑 **Champions** | 948 (22%) | 34 d | 34 | $481 | 50 d | Active newer customers — onboarding, welcome offers, nurture toward Promising |
-| ⚠️ **At Risk** | 1,687 (40%) | 174 d | 27 | $564 | 241 d | **76% at Critical churn risk.** Win-back campaigns, reactivation offers |
+| ⭐ **High-Value** | 1,634 (38%) | 30 d | 188 | $4,412 | 274 d | **Drives 84% of revenue.** Protect with VIP program, early access, retention offers |
+| 👑 **New Customers** | 948 (22%) | 34 d | 34 | $481 | 50 d | Active newer customers — onboarding, welcome offers, nurture toward High-Value |
+| ⚠️ **Lapsed** | 1,687 (40%) | 174 d | 27 | $564 | 241 d | **76% at Critical churn risk.** Win-back campaigns, reactivation offers |
 
 ## 🧪 Methodology
 
@@ -56,22 +56,22 @@ SSE drops sharply until k=3 and then flattens. More importantly, silhouette **pe
 ### Segment sizes and revenue share
 ![Segment overview](figures/segment-overview.png)
 
-**Promising** contains 38% of customers but drives **84% of total revenue** — the Pareto principle in action. Retaining this segment is the #1 business priority.
+**High-Value** contains 38% of customers but drives **84% of total revenue** — the Pareto principle in action. Retaining this segment is the #1 business priority.
 
 ### RFMT fingerprint per segment
 ![RFMT fingerprint](figures/rfmt-fingerprint.png)
 
-Promising customers order far more frequently (188 vs 27–34) and spend far more per customer ($4,412 vs ~$500). At Risk customers haven't purchased in ~6 months on average.
+High-Value customers order far more frequently (188 vs 27–34) and spend far more per customer ($4,412 vs ~$500). Lapsed customers haven't purchased in ~6 months on average.
 
 ### Segments in RFM space
 ![3D scatter](figures/segments-3d.png)
 
-The three clusters separate visibly along the Frequency and Monetary axes. At Risk customers stretch along the Recency axis (inactive), while Promising anchors the high end of frequency × monetary.
+The three clusters separate visibly along the Frequency and Monetary axes. Lapsed customers stretch along the Recency axis (inactive), while High-Value anchors the high end of frequency × monetary.
 
 ### Churn risk distribution
 ![Churn risk](figures/churn-risk.png)
 
-**76% of At Risk customers are at Critical churn risk** — they need immediate re-engagement. Champions and Promising customers are mostly Low or Medium risk.
+**76% of Lapsed customers are at Critical churn risk** — they need immediate re-engagement. New Customers and High-Value customers are mostly Low or Medium risk.
 
 ## 🖼️ Power BI dashboard
 

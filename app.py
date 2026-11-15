@@ -48,9 +48,9 @@ def load_models():
 # Prediction function
 # Cluster names mapping
 CLUSTER_NAMES = {
-    0: 'Champions',        # High frequency, high monetary, low recency, high tenure
-    1: 'At Risk',          # High recency (inactive), lower frequency
-    2: 'Promising'         # Medium values across metrics
+    0: 'New Customers',    # Recent, short tenure (~50 days), low spend so far
+    1: 'Lapsed',           # Inactive ~6 months, low frequency
+    2: 'High-Value'        # Very high frequency and spend, long tenure (84% of revenue)
 }
 
 def predict_cluster(recency, frequency, monetary, tenure, kmeans, scaler):
@@ -132,9 +132,9 @@ if st.button("🔮 Predict Cluster", type="primary", use_container_width=True):
     
     # Emoji mapping
     emoji_map = {
-        'Champions': '👑',
-        'At Risk': '⚠️',
-        'Promising': '⭐'
+        'New Customers': '👑',
+        'Lapsed': '⚠️',
+        'High-Value': '⭐'
     }
     emoji = emoji_map.get(cluster_name, '🎯')
     

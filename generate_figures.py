@@ -21,8 +21,8 @@ plt.rcParams.update({
     'axes.titleweight': 'bold',
 })
 
-PALETTE = {'Champions': '#2E8B57', 'Promising': '#4682B4', 'At Risk': '#C44536'}
-SEG_ORDER = ['Champions', 'Promising', 'At Risk']
+PALETTE = {'New Customers': '#2E8B57', 'High-Value': '#4682B4', 'Lapsed': '#C44536'}
+SEG_ORDER = ['New Customers', 'High-Value', 'Lapsed']
 
 FIG_DIR = Path('figures')
 FIG_DIR.mkdir(exist_ok=True)
